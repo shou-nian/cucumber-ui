@@ -120,6 +120,7 @@ class BrowserFactory:
             except:
                 logger.warning("最大化窗口失败，可能处于headless模式或远程执行")
 
+    @property
     def get_driver(self) -> Optional[webdriver.Remote]:
         return self._driver
 
