@@ -1,0 +1,45 @@
+# config/browser.yaml
+default_browser: "chrome"
+headless: false
+webdriver_manager: true
+implicit_wait: 10
+page_load_timeout: 30
+script_timeout: 30
+
+chrome:
+  headless: false
+  arguments:
+    - "--start-maximized"
+    - "--disable-notifications"
+    - "--disable-gpu"
+    - "--no-sandbox"
+    - "--disable-dev-shm-usage"
+    - "--lang=zh-CN"
+  experimental_options:
+    "prefs":
+      "download.default_directory": "/tmp/downloads"
+      "profile.default_content_setting_values.notifications": 2
+  extensions:
+    - "path/to/extension.crx"
+
+firefox:
+  headless: false
+  arguments:
+    - "--width=1920"
+    - "--height=1080"
+  preferences:
+    "browser.download.folderList": 2
+    "browser.download.dir": "/tmp/downloads"
+
+edge:
+  headless: false
+  arguments:
+    - "--inprivate"
+
+remote:
+  enabled: false
+  command_executor: "http://localhost:4444/wd/hub"
+  browser: "chrome"
+  capabilities:
+    platformName: "Linux"
+    version: "latest"
