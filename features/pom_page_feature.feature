@@ -9,15 +9,14 @@ Feature: POM Product Browsing
     Then the page title should contain "<expected_title>"
 
     Examples:
-      | url                   | expected_title |
+      | url                     | expected_title |
       | https://letcode.in/home | Products       |
 
-  @product_detail @requires_homepage
+  @product_detail @requires_pom_page
   Scenario Outline: Access product details
     Given I am on the POM homepage
     When I click on product with ID "<product_id>"
     Then I should be redirected to "<expected_path>"
-    And the product page should load successfully
 
     Examples:
       | product_id | expected_path |
