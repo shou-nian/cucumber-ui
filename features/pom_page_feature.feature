@@ -1,9 +1,25 @@
-Feature:
+Feature: POM Product Browsing
 
-  Scenario Outline:
-    Given I open browser visit pom page
-    When I using the url: "<pom_page_url>" navigation to pom page
-    Then Page title can should be "<page_title>"
+  Background:
+    Given I have opened the browser
+
+  @homepage
+  Scenario Outline: Verify homepage access
+    When I navigate to "<url>"
+    Then the page title should contain "<expected_title>"
+
     Examples:
-      | pom_page_url            | page_title |
-      | https://letcode.in/home | Products   |
+      | url                   | expected_title |
+      | https://letcode.in/home | Products       |
+
+  @product_detail @requires_homepage
+  Scenario Outline: Access product details
+    Given I am on the POM homepage
+    When I click on product with ID "<product_id>"
+    Then I should be redirected to "<expected_path>"
+    And the product page should load successfully
+
+    Examples:
+      | product_id | expected_path |
+      | 1          | /product/1    |
+      | 2          | /product/2    |

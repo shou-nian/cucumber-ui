@@ -11,5 +11,6 @@ class PomPage:
     def navigation_pom_page(self, page_url: str):
         self.driver.get(page_url)
 
+    @property
     def page_title(self) -> str:
         return self.driver.find_element(*self._page_title_locator).text
