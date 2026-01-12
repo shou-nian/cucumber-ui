@@ -38,7 +38,6 @@ class BrowserFactory:
             logger.info(f"成功创建 {browser.upper()} 浏览器驱动")
             return self._driver
 
-
         except Exception as e:
             logger.error(f"创建浏览器驱动失败: {e}")
             raise
@@ -69,7 +68,9 @@ class BrowserFactory:
             service = ChromeService(ChromeDriverManager().install())
         else:
             driver_path = chrome_config.get("driver_path", None)
-            service = ChromeService(executable_path=driver_path) if driver_path else None
+            service = (
+                ChromeService(executable_path=driver_path) if driver_path else None
+            )
 
         return webdriver.Chrome(service=service, options=options)
 
@@ -92,7 +93,9 @@ class BrowserFactory:
             service = FirefoxService(GeckoDriverManager().install())
         else:
             driver_path = firefox_config.get("driver_path")
-            service = FirefoxService(executable_path=driver_path) if driver_path else None
+            service = (
+                FirefoxService(executable_path=driver_path) if driver_path else None
+            )
 
         return webdriver.Firefox(service=service, options=options)
 
