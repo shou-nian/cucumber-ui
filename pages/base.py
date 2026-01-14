@@ -3,9 +3,9 @@ import abc
 
 class BasePage(abc.ABC):
     @abc.abstractmethod
-    def navigation(self, url):
+    def navigation(self):
         """
-        navigation to the url page
+        navigation to page
         """
 
     @abc.abstractmethod

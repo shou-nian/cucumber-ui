@@ -8,11 +8,12 @@ class PomPage(BasePage):
     def __init__(self, driver: webdriver.Remote):
         self.driver = driver
 
+        self._page_url = "https://letcode.in/home"
         self._page_title_locator = (By.CSS_SELECTOR, "h2.title")
         self._product_locator = (By.CSS_SELECTOR, ".columns div:nth-child(%s) > .card")
 
-    def navigation(self, page_url: str):
-        self.driver.get(page_url)
+    def navigation(self):
+        self.driver.get(self._page_url)
 
     @property
     def get_page_title(self) -> str:
