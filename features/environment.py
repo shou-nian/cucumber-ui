@@ -28,7 +28,11 @@ def page_class_mapping(page_name: str):
         pom=PomPage,
     )
 
-    return _mapping.get(page_name, None)
+    _cls = _mapping.get(page_name, None)
+    if _cls is None:
+        raise ValueError(f'Page {page_name} not supported')
+
+    return _cls
 
 
 fixture_registry = {
