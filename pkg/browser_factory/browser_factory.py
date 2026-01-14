@@ -22,7 +22,7 @@ class BrowserFactory:
         self._config = config
         self._driver = None
 
-    def create_driver(self, browser_type: Optional[str] = None) -> webdriver.Remote:
+    def create_browser(self, browser_type: Optional[str] = None) -> webdriver.Remote:
         browser = browser_type or self._config.get("default_browser", "chrome")
         browser = browser.lower()
 
@@ -120,7 +120,7 @@ class BrowserFactory:
         if not self._config.get("headless", False):
             try:
                 self._driver.maximize_window()
-            except:
+            except RuntimeError as e:
                 logger.warning("最大化窗口失败，可能处于headless模式或远程执行")
 
     @property
@@ -143,7 +143,7 @@ class BrowserFactory:
             self._driver.close()
 
     def __enter__(self):
-        self.create_driver()
+        self.create_browser()
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.quit()
