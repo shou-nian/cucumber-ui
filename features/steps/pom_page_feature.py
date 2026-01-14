@@ -13,15 +13,14 @@ def step_open_browser(context):
     context.logger.info("execute background.")
 
 
-@when('I navigate to "(?P<url>.+)"')
-def step_navigate_to_pom_page(context, url):
+@when('I navigate to pom page')
+def step_navigate_to_pom_page(context):
     """
     :type context: behave.runner.Context
-    :type url: str
     """
     pom_page: PomPage = context.pages.get_page(PomPage)
-    context.logger.info(f"navigate to '{url}'")
-    pom_page.navigation(url)
+    context.logger.info("navigate to pom page")
+    pom_page.navigation()
 
     context.current_page = pom_page
 
