@@ -138,6 +138,10 @@ class BrowserFactory:
             finally:
                 self._driver = None
 
+    def close(self):
+        if self._driver:
+            self._driver.close()
+
     def __enter__(self):
         self.create_driver()
 
