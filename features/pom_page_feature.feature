@@ -3,16 +3,16 @@ Feature: POM Product Browsing
   Background:
     Given I have opened the browser
 
-  @homepage
+  @fixture.browser @fixture.pages
   Scenario Outline: Verify homepage access
-    When I navigate to "<url>"
+    When I navigate to pom page
     Then the page title should contain "<expected_title>"
 
     Examples:
-      | url                     | expected_title |
-      | https://letcode.in/home | Products       |
+      | expected_title |
+      | Products       |
 
-  @product_detail @requires_pom_page
+  @fixture.browser @fixture.pages @requires.page.pom
   Scenario Outline: Access product details
     Given I am on the POM homepage
     When I click on product with ID "<product_id>"
