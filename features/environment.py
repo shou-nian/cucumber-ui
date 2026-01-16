@@ -1,4 +1,6 @@
+import functools
 import inspect
+import time
 
 from behave.fixture import fixture, use_fixture_by_tag
 
@@ -39,6 +41,21 @@ fixture_registry = {
     "fixture.browser": browser,
     "fixture.pages": pages,
 }
+
+
+def auto_screenshot_with_failed(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        context, step = args
+        if step.status == 'failed':
+            context.logger.error(f"test step failed: {step.keyword} {step.name}, start auto screenshot...")
+            context.browser.save_screenshot(
+                f"{time.strftime('%Y_%m_%d_%H_%M_%S', time.localtime())}.png"
+            )
+
+        func(*args, **kwargs)
+
+    return wrapper
 
 
 def before_all(context):
@@ -89,3 +106,12 @@ def after_scenario(context, scenario):
     context.logger.info(f"execute {inspect.currentframe().f_code.co_name}")
 
     context.current_page = None
+
+
+def before_step(context, step):
+    context.logger.info(f"execute {inspect.currentframe().f_code.co_name}")
+
+
+@auto_screenshot_with_failed
+def after_step(context, step):
+    context.logger.info(f"execute {inspect.currentframe().f_code.co_name}")
