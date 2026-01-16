@@ -182,3 +182,18 @@ after_feature -> after_all
 ```python
 
 ```
+
+- Other
+
+```markdown
+Seriously, Don’t Test the User Interface
+
+Warning
+While you can use behave to drive the “user interface” (UI) or front-end, interacting with the model layer or the
+business logic, e.g. by using a REST API, is often the better choice.
+And keep in mind, BDD advises your to test WHAT your application should do and not HOW it is done.
+```
+
+```html
+<a href="https://jenisys.github.io/behave.example/">教程</a>
+```
